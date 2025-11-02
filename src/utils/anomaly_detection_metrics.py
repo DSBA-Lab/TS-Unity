@@ -285,10 +285,10 @@ class ThresholdOptimization:
         threshold = search_lower_bound
         best_metrics = (-1.0, -1.0, -1.0)
         best_threshold = 0.0
-        
+
         for i in range(search_step):
             threshold += search_range / float(search_step)
-            target = ThresholdOptimization.calc_seq(score, label, threshold, K=K, calc_latency=True)
+            target = SequenceMetrics.calc_seq(score, label, threshold, K=K, calc_latency=True)
             
             if target[0] > best_metrics[0]:
                 best_threshold = threshold
@@ -341,10 +341,10 @@ class ThresholdOptimization:
         
         best_metrics = (-1.0, -1.0, -1.0)
         best_threshold = 0.0
-        
+
         for i in range(int(search_range // search_interval)):
             threshold = np.percentile(valid_score, 100 - (i + 1) * search_interval)
-            target = ThresholdOptimization.calc_seq(score, label, threshold, K=K, calc_latency=True)
+            target = SequenceMetrics.calc_seq(score, label, threshold, K=K, calc_latency=True)
             
             if target[0] > best_metrics[0]:
                 best_threshold = threshold
